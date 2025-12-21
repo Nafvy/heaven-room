@@ -1,0 +1,16 @@
+{
+  "admins": [
+    {"name": "Hyura", "role": "Co-Owner"},
+    {"name": "Nafvy", "role": "Founder / Owner"},
+    {"name": "Adi", "role": "Admin"},
+    {"name": "Jufvy", "role": "Admin"},
+    {"name": "Lyyxazy", "role": "Admin"},
+    {"name": "Nano", "role": "Helper"}
+  ],
+  "partners": [
+    {"name": "Dovénure", "role": "Alfi"},
+    {"name": "Sekte Asik Amat", "role": "Nafky"},
+    {"name": "Tenoft", "role": "Apgan"},
+    {"name": "On My Game", "role": "Mail"}
+  ]
+}

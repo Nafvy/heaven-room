@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Héaven Room — Marga Surgawi</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+	.album-gallery {
+  max-width: 900px;
+  margin: 80px auto 40px;
+  padding: 30px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  text-align: center;
+}
+
+.album-gallery h2 {
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.gallery-grid img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.45);
+}
+	.fake-comments {
+  max-width: 800px;
+  margin: 80px auto 40px;
+  padding: 30px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+}
+
+.fake-comments h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.comment {
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.comment:last-child {
+  border-bottom: none;
+}
+
+.comment .name {
+  font-weight: bold;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.comment p {
+  margin: 6px 0 0;
+  font-size: 14px;
+  opacity: 0.85;
+}
+/* Optional animation for entrance */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Increase contrast so text stays readable */
+.glass-hero h1,
+.glass-hero p {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+/* =========================================
+   RESET & BASE
+========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #0d0d1a, #0a0a14);
+  color: #f8f9fa;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* =========================================
+   ROOT VARIABLES
+========================================= */
+:root {
+  --primary: #0d0d1a;
+  --secondary: #14142b;
+  --accent: #6a5af9;
+  --accent2: #5e81ac;
+  --text: #f8f9fa;
+  --text-muted: #adb5bd;
+  --card-bg: rgba(25,25,45,0.85);
+  --border-radius: 20px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.5);
+  --glow: 0 0 20px rgba(106,90,249,0.5);
+  --transition: all 0.4s cubic-bezier(0.165,0.84,0.44,1);
+}
+
+/* =========================================
+   HEADER & NAV
+========================================= */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--secondary);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+header .logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+}
+
+nav ul li a {
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+nav ul li a:hover {
+  color: var(--accent);
+}
+
+/* =========================================
+   SCROLL PROGRESS BAR
+========================================= */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  width: 0%;
+  z-index: 1100;
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+.container {
+  max-width: 1000px;
+  width: 90%;
+  margin: 120px auto 60px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+/* =========================================
+   HERO SECTION
+========================================= */
+.hero {
+  text-align: center;
+  position: relative;
+}
+
+.hero .logo-large {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,var(--accent),var(--accent2));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 20px;
+  box-shadow: var(--glow);
+  position: relative;
+  overflow: hidden;
+  border: 4px solid rgba(255,255,255,0.1);
+}
+
+.hero .logo-large img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--secondary);
+  display: block;
+}
+
+.hero .logo-large::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent,var(--accent),var(--accent2),transparent);
+  animation: rotate 8s linear infinite;
+  z-index: -1;
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 10px rgba(106,90,249,0.2);
+}
+
+.hero p {
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.owner-tag {
+  display: inline-block;
+  background: rgba(106,90,249,0.2);
+  color: var(--accent);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-top: 12px;
+}
+
+/* =========================================
+   INFO SECTION
+========================================= */
+.info-section {
+  background: var(--card-bg);
+  padding: 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg,var(--accent),var(--accent2));
+  z-index: 1;
+}
+
+.info-section h2 {
+  font-size: 1.6rem;
+  margin-bottom: 15px;
+}
+
+.info-section p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 1.05rem;
+}
+
+.info-section .highlight {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* =========================================
+   ADMINS & PARTNERS
+========================================= */
+.section-title {
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 25px;
+  color: var(--text);
+}
+
+.admins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(160px,1fr));
+  gap: 20px;
+}
+
+.admin-card {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  cursor: default;
+}
+
+.admin-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.6), var(--glow);
+}
+
+.admin-card::before {
+  content: '';
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  background: linear-gradient(135deg,transparent, rgba(106,90,249,.1), transparent);
+  opacity:0;
+  transition: opacity .3s ease;
+  z-index:1;
+}
+
+.admin-card:hover::before {
+  opacity:1;
+}
+
+.admin-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,var(--accent),var(--accent2));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 12px;
+  font-weight:700;
+  color:#fff;
+  font-size:1.2rem;
+}
+
+.admin-name {
+  font-weight:600;
+}
+
+.admin-role {
+  font-size:.85rem;
+  color: var(--text-muted);
+}
+
+/* =========================================
+   SEARCH FILTER
+========================================= */
+.search-box {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.search-box input {
+  padding: 10px 15px;
+  border-radius: 12px;
+  border: none;
+  width: 250px;
+  max-width: 80%;
+  font-size: 1rem;
+  outline: none;
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+footer {
+  text-align:center;
+  padding:30px 0;
+  color: var(--text-muted);
+}
+
+/* =========================================
+   FADE-IN SCROLL
+========================================= */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media(max-width:768px){
+.hero h1{font-size:2.3rem}
+}
+
+@media(max-width:480px){
+.hero h1{font-size:2rem}
+.admins-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+
+<body>
+	<div id="wbt-preinfo-overlay">
+  <div class="wbt-preinfo-card">
+    <div class="wbt-wa-icon">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </div>
+
+    <h2>Tetap Terupdate!</h2>
+    <p>
+      Ikuti saluran WhatsApp untuk update fitur,
+      status server, dan info penting lainnya.
+    </p>
+
+    <a
+      href="https://whatsapp.com/channel/0029Vb7ddNGFSAtBK92XS91D"
+      target="_blank"
+      rel="noopener"
+      class="wbt-btn-primary">
+      Kunjungi Saluran ↗
+    </a>
+
+    <button type="button" id="wbt-skip-btn" class="wbt-btn-skip">
+      Melewati
+    </button>
+  </div>
+</div>
+</section>
+
+<!-- SCROLL PROGRESS BAR -->
+<div id="progress-bar"></div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <img src="https://cdn.yupra.my.id/yp/4jcedyft.jpg" alt="Héaven Room Logo">
+    <span>Héaven Room</span>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#admins">Admin</a></li>
+      <li><a href="#partners">Partner</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero fade-in">
+    <div class="logo-large">
+      <img src="https://cdn.yupra.my.id/yp/4jcedyft.jpg" alt="Logo Héaven Room">
+    </div>
+    <h1>Héaven Room</h1>
+    <p>Marga bertemakan surga yang didirikan oleh Nafvy pada tanggal 16 April 2024, membentuk komunitas digital penuh persaudaraan.</p>
+    <div class="owner-tag">Owner: Nafvy</div>
+  </section>
+
+  <!-- ABOUT INFO -->
+  <section class="info-section fade-in" id="about">
+    <h2><i class="fas fa-info-circle"></i> Tentang Héaven</h2>
+    <p>
+      <span class="highlight">Héaven</span> adalah marga bertemakan surga, didirikan oleh <span class="highlight">Nafvy</span> pada tanggal <span class="highlight">16 April 2024</span>.
+      Marga ini menjadi tempat persaudaraan digital yang solid, mendukung anggota, dan menjunjung tinggi kekeluargaan.
+    </p>
+  </section>
+
+  <!-- SEARCH -->
+  <div class="search-box">
+    <input type="text" id="search" placeholder="Cari admin...">
+  </div>
+
+  <!-- ADMINS -->
+  <section class="fade-in" id="admins">
+    <h2 class="section-title">Tim Admin Héaven</h2>
+    <div class="admins-grid">
+      <div class="admin-card">
+        <div class="admin-avatar">H</div>
+        <div class="admin-name">Hyura</div>
+        <div class="admin-role">Co-Owner</div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-avatar">N</div>
+        <div class="admin-name">Nafvy</div>
+        <div class="admin-role">Founder / Owner</div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-avatar">A</div>
+        <div class="admin-name">Adi</div>
+        <div class="admin-role">Admin</div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-avatar">J</div>
+        <div class="admin-name">Jufvy</div>
+        <div class="admin-role">Admin</div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-avatar">L</div>
+        <div class="admin-name">Lyyxazy</div>
+        <div class="admin-role">Admin</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">N</div>
+        <div class="admin-name">Nano</div>
+        <div class="admin-role">Helper</div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- PARTNERS -->
+  <section class="fade-in" id="partners">
+    <h2 class="section-title">Special Partner</h2>
+    <div class="admins-grid">
+      <div class="admin-card">
+        <div class="admin-avatar">D</div>
+        <div class="admin-name">Dovénure</div>
+        <div class="admin-role">Alfi</div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-avatar">ASA</div>
+        <div class="admin-name">Sekte Asik Amat</div>
+        <div class="admin-role">Nafky</div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-avatar">10/10</div>
+        <div class="admin-name">Tenoft</div>
+        <div class="admin-role">Apgan</div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-avatar">OMG</div>
+        <div class="admin-name">On My Game</div>
+        <div class="admin-role">Mail</div>
+      </div>
+      <div class="admin-card">
+        <div class="admin-avatar">79</div>
+        <div class="admin-name">-79</div>
+        <div class="admin-role">Zidan / Z'79</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">STR</div>
+        <div class="admin-name">-Satoru</div>
+        <div class="admin-role">Keano</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">Péack</div>
+        <div class="admin-name">Péacock</div>
+        <div class="admin-role">Haquc</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">Cstr</div>
+        <div class="admin-name">Codestra</div>
+        <div class="admin-role">Twin</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">NH</div>
+        <div class="admin-name">NH Creator</div>
+        <div class="admin-role">DNH</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">Lly</div>
+        <div class="admin-name">Lillyyans</div>
+        <div class="admin-role">Keano</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">CKDT</div>
+        <div class="admin-name">Cikidut</div>
+        <div class="admin-role">Zephyr</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">PG</div>
+        <div class="admin-name">Pega Unit</div>
+        <div class="admin-role">Nekuy</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">FRST</div>
+        <div class="admin-name">Frost</div>
+        <div class="admin-role">idk</div>
+        </div>
+      <div class="admin-card">
+        <div class="admin-avatar">SN</div>
+        <div class="admin-name">Sun</div>
+        <div class="admin-role">DIOCS</div>
+        </div>
+        <div class="admin-card">
+        <div class="admin-avatar">H</div>
+        <div class="admin-name">Housen</div>
+        <div class="admin-role">Ryn</div>
+        </div>
+        <div class="admin-card">
+        <div class="admin-avatar">O2N</div>
+        <div class="admin-name">Nhetral</div>
+        <div class="admin-role">V7 Fyzm</div>
+        </div>
+        <div class="admin-card">
+        <div class="admin-avatar">M</div>
+        <div class="admin-name">Mizu</div>
+        <div class="admin-role">Dadan</div>
+        </div>
+        <div class="admin-card">
+        <div class="admin-avatar">S</div>
+        <div class="admin-name">Stone</div>
+        <div class="admin-role">Flado</div>
+        </div>
+        <div class="admin-card">
+        <div class="admin-avatar">T</div>
+        <div class="admin-name">Tenshi</div>
+        <div class="admin-role">Putra</div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+// ==========================================
+// FADE-IN ON SCROLL
+// ==========================================
+const faders = document.querySelectorAll('.fade-in');
+const options = {threshold:0.1};
+const observer = new IntersectionObserver((entries,observer)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.style.opacity = 1;
+      entry.target.style.transform = 'translateY(0)';
+      observer.unobserve(entry.target);
+    }
+  });
+},options);
+
+faders.forEach(fader => observer.observe(fader));
+
+// ==========================================
+// SCROLL PROGRESS BAR
+// ==========================================
+const progressBar = document.getElementById('progress-bar');
+window.addEventListener('scroll',()=>{
+  const scrollTop = window.scrollY;
+  const docHeight = document.body.scrollHeight - window.innerHeight;
+  const scrollPercent = (scrollTop/docHeight)*100;
+  progressBar.style.width = scrollPercent + "%";
+});
+
+// ==========================================
+// SEARCH FILTER
+// ==========================================
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input',(e)=>{
+  const val = e.target.value.toLowerCase();
+  const admins = document.querySelectorAll('.admin-card');
+  admins.forEach(admin=>{
+    const name = admin.querySelector('.admin-name').innerText.toLowerCase();
+    admin.style.display = name.includes(val)? 'block':'none';
+  });
+});
+
+</script>
+
+<!-- CUSTOMER SERVICE BUTTON -->
+<a href="https://wa.me/6283171613803" target="_blank" class="cs-button" title="Chat via WhatsApp">
+  <i class="fas fa-headset"></i>
+</a>
+
+<style>
+	/* LOADING SCREEN */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0; 
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+/* 3 DOTS LOADER */
+.loader-dots span {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin: 0 5px;
+  background: #ff8c42;
+  border-radius: 50%;
+  animation: bounce 1s infinite;
+}
+
+.loader-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.loader-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1); }
+}
+/* === PREINFO POPUP (STABLE VERSION) === */
+#wbt-preinfo-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+}
+
+.wbt-preinfo-card {
+  width: 90%;
+  max-width: 360px;
+  background: rgba(18, 25, 40, 0.95);
+  border-radius: 18px;
+  padding: 28px;
+  text-align: center;
+  color: #fff;
+  font-family: system-ui, Arial, sans-serif;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+}
+
+.wbt-wa-icon img {
+  width: 60px;
+  margin-bottom: 14px;
+  filter: drop-shadow(0 0 12px #25D366);
+}
+
+.wbt-preinfo-card h2 {
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.wbt-preinfo-card p {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 22px;
+}
+
+.wbt-btn-primary {
+  display: block;
+  background: linear-gradient(135deg, #25D366, #1ebe5d);
+  color: #fff;
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.wbt-btn-skip {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: none;
+  color: #ccc;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+/* Customer Service Button */
+.cs-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #ff8c42; /* Oranye */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 28px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 10000;
+  transition: transform 0.2s ease;
+  animation: pulse 1.2s infinite;
+}
+
+/* Hover Effect */
+.cs-button:hover {
+  transform: scale(1.2);
+}
+
+/* Animasi Besar-Kecil (Pulse) */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+</style>
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="loader-dots">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<script>
+// LOADING SCREEN HILANG 3 DETIK
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loadingScreen = document.getElementById('loading-screen');
+    loadingScreen.style.opacity = '0';
+    loadingScreen.style.transition = 'opacity 0.5s ease';
+    setTimeout(() => loadingScreen.style.display = 'none', 500);
+  }, 2000); // 3 detik
+});
+</script>
+<section class="album-gallery">
+  <h2>Album Foto</h2>
+
+  <div class="gallery-grid">
+    <img src="https://cdn.yupra.my.id/yp/btcm19gf.jpg" alt="Foto 1">
+    <img src="https://cdn.yupra.my.id/yp/puzdp2xw.jpg" alt="Foto 2">
+    <img src="https://cdn.yupra.my.id/yp/m3kbsqun.jpg" alt="Foto 3">
+  </div>
+</section>
+<section class="fake-comments">
+  <h2>Komentar Para Member</h2>
+
+  <div class="comment">
+    <span class="name">Sofvy</span>
+    <p>Marganya keren banget, gw aja masuk kaya dijadiin raja🔥</p>
+  </div>
+
+  <div class="comment">
+    <span class="name">Hyura</span>
+    <p>Ada gw guys diatas😹</p>
+  </div>
+
+  <div class="comment">
+    <span class="name">Lyyxazy</span>
+    <p>When yah</p>
+  </div>
+
+  <div class="comment">
+    <span class="name">DJ Panda</span>
+    <p>Hipen kapan bikin Div. Remixer😹⁉️</p>
+  </div>
+
+  <div class="comment">
+    <span class="name">Any.Dash</span>
+    <p>Semoga makin berkembang marganya😅.</p>
+  </div>
+  <!-- FOOTER -->
+<footer>
+  © 2024 Héaven Room — All Rights Reserved
+</footer>
+  </div>
+</section>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const overlay = document.getElementById("wbt-preinfo-overlay");
+  const skipBtn = document.getElementById("wbt-skip-btn");
+
+  skipBtn.addEventListener("click", () => {
+    overlay.style.display = "none";
+  });
+});
+</script>
+</body>
+</html>

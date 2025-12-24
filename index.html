@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Sedang Maintenance</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+/* RESET AMAN */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* BODY */
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: system-ui, Arial, sans-serif;
+  color: #fff;
+  text-align: center;
+}
+
+/* WRAPPER */
+.mt-wrapper {
+  padding: 30px;
+}
+
+/* CHARACTER */
+.mt-character {
+  position: relative;
+  width: 120px;
+  height: 160px;
+  margin: 0 auto 25px;
+  animation: float 2.5s ease-in-out infinite;
+}
+
+/* HEAD */
+.mt-head {
+  width: 80px;
+  height: 80px;
+  background: #fff;
+  border-radius: 50%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.mt-head::before,
+.mt-head::after {
+  content: "";
+  position: absolute;
+  top: 30px;
+  width: 10px;
+  height: 10px;
+  background: #333;
+  border-radius: 50%;
+}
+
+.mt-head::before { left: 22px; }
+.mt-head::after  { right: 22px; }
+
+/* BODY */
+.mt-body {
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  margin: -10px auto 0;
+  border-radius: 20px;
+}
+
+/* SHADOW */
+.mt-shadow {
+  width: 70px;
+  height: 12px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 50%;
+  margin: 10px auto 0;
+  animation: shadow 2.5s ease-in-out infinite;
+}
+
+/* TEXT */
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 14px;
+  opacity: 0.85;
+  margin-bottom: 15px;
+}
+
+.mt-status {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+/* ANIMATION */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+@keyframes shadow {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(0.7); opacity: 0.15; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="mt-wrapper">
+  <div class="mt-character">
+    <div class="mt-head"></div>
+    <div class="mt-body"></div>
+    <div class="mt-shadow"></div>
+  </div>
+
+  <h1>Website Sedang Maintenance</h1>
+  <p>
+    Kami Sedang Melakukan Pembaruan Agar Website Ini Menjadi Lebih Baik‼️ 
+    Silakan kembali lagi nanti.
+  </p>
+  <span class="mt-status">⏳ Sedang di-update...</span>
+</div>
+
+</body>
+</html>

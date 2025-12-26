@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HÉAVEN | Under Ascension</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. VARIABLES & CONFIG
+           ========================================================================== */
+        :root {
+            --accent-gold: #D4AF37;
+            --heaven-blue: #00d4ff;
+            --bg-dark: #050505;
+            --text-white: #ffffff;
+            /* IMAGE URL: Background untuk suasana perbaikan/futuristik */
+            --bg-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop');
+        }
+
+        /* ==========================================================================
+           2. RESET & BASE
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+            font-family: 'Montserrat', sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Background Layer */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-image) no-repeat center center/cover;
+            filter: brightness(0.2) grayscale(0.5);
+            z-index: -2;
+        }
+
+        .vignette {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+            z-index: -1;
+        }
+
+        /* ==========================================================================
+           3. MAIN CONTENT
+           ========================================================================== */
+        .maintenance-container {
+            padding: 20px;
+            max-width: 800px;
+            z-index: 10;
+        }
+
+        /* Logo Animation */
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            letter-spacing: 15px;
+            margin-bottom: 10px;
+            background: linear-gradient(to bottom, #fff, var(--accent-gold));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.6)); transform: scale(1.02); }
+        }
+
+        .status-tag {
+            display: inline-block;
+            padding: 6px 20px;
+            border: 1px solid var(--accent-gold);
+            border-radius: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 5px;
+            margin-bottom: 40px;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        /* Countdown Grid */
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .count-box {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .count-num {
+            display: block;
+            font-size: 2.5rem;
+            font-family: 'Cinzel', serif;
+            color: var(--accent-gold);
+        }
+
+        .count-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            position: absolute;
+            height: 100%;
+            width: 65%; /* Atur persentase update di sini */
+            background: linear-gradient(90deg, var(--accent-gold), var(--heaven-blue));
+            box-shadow: 0 0 15px var(--heaven-blue);
+            border-radius: 10px;
+            animation: progressAnim 2s infinite ease-in-out;
+        }
+
+        @keyframes progressAnim {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; filter: brightness(1.3); }
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================================================
+           4. RESPONSIVE
+           ========================================================================== */
+        @media (max-width: 600px) {
+            .countdown-grid { gap: 10px; }
+            .count-box { padding: 10px; }
+            .count-num { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+    <div class="vignette"></div>
+
+    <div class="maintenance-container">
+        <div class="status-tag">System Ascension in Progress</div>
+        <h1 class="logo">HÉAVEN</h1>
+        <h2>Evolution Underway</h2>
+
+        <div class="countdown-grid">
+            <div class="count-box">
+                <span class="count-num" id="days">00</span>
+                <span class="count-label">Days</span>
+            </div>
+            <div class="count-box">
+                <span class="count-num" id="hours">00</span>
+                <span class="count-label">Hours</span>
+            </div>
+            <div class="count-box">
+                <span class="count-num" id="minutes">00</span>
+                <span class="count-label">Mins</span>
+            </div>
+            <div class="count-box">
+                <span class="count-num" id="seconds">00</span>
+                <span class="count-label">Secs</span>
+            </div>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <p class="footer-note">Héaven is upgrading its core for a better creator experience.<br>Stay tuned on our official socials.</p>
+    </div>
+
+    <script>
+        // CONFIG: Atur tanggal target update selesai di sini
+        // Format: "Month Day, Year Hours:Minutes:Seconds"
+        const targetDate = new Date("Dec 26, 2025 15:44:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+
+            // Perhitungan waktu
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            const d = Math.floor(gap / day);
+            const h = Math.floor((gap % day) / hour);
+            const m = Math.floor((gap % hour) / minute);
+            const s = Math.floor((gap % minute) / second);
+
+            // Update ke DOM
+            document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+            document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+            document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+            document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+
+            // Jika waktu habis 
+            if (gap < 0) {
+                document.querySelector(".countdown-grid").innerHTML = "<h3>MAINTENACE AKAN SEGERA SELESAI</h3>";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
